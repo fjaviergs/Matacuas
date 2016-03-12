@@ -14,6 +14,8 @@
 		 <div class="container">
 				<h1>Matacuás</h1>
 			<br>
+
+
 		<div class="dropdown">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     Menú principal
@@ -27,8 +29,30 @@
     <li><a href="login.html">Cerrar sesión</a></li>
   </ul>
 </div>		
-		
-
+				
+		<div class="container row col-md-6 col-md-offset-3">
+		<h3>Premiar conductor</h3>
+					<form action="main.html" method="post" accept-charset="utf-8">
+						<div class="form-group">
+							
+								<label for="matricula">Matricula</label>
+								<input type="text" class="form-control" name="matricula" id="matricula" />
+							
+								<label for="descripcion">Razón para premiarle</label>
+								<textarea rows="3" class="form-control" name="descripcion" 
+										id="descripcion"></textarea>
+							
+							
+								<label for="lugar">Lugar de la acción</label>
+								<textarea rows="1" class="form-control" name="state"
+										id="state"></textarea>
+								<br>
+								<input type="submit"
+								 value="Reportar" class="btn btn-info"/>
+							
+						</div>
+					</form>
+		</div>
 	</div>
 	</body>
 </html>
