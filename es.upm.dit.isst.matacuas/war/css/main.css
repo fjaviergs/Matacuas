@@ -1,0 +1,72 @@
+#main_div {
+	margin-top: 10px;
+}
+.reporte {
+	border: 1px black solid;
+	float: left;
+	margin-top: 10px;
+	border-radius: 5px;
+}
+
+.reporte:hover {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.miniatura {
+	width: 33%;
+	float: left;
+}
+
+.foto {
+	width: 100%;
+	border-right: 1px black solid;
+}
+
+.info {
+	position: relative;
+	float: left;
+	width: 33%;
+	list-style-type:none;
+	text-align: center;
+	margin:0
+}
+
+.datos {
+	text-align: center;
+	list-style-type:none;
+	margin: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.datos > li {
+	width: 100%;
+	text-align: center;
+	background-color: #D9CFB2;
+	width: 100%;
+}
+
+.dir {
+	border: 1px solid black;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom: none;
+}
+
+.fecha {
+	border: 1px solid black;
+}
+
+.matricula {
+	border: 1px solid black;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top: none;
+}
+
+.detalle {
+	position: relative;
+	float: left;
+	width: 33%;
+	padding: 5px;
+}
