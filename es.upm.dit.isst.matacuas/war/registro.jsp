@@ -15,10 +15,10 @@
 								<label for="usuario">Nombre de usuario</label>
 								<input type="text" class="form-control" name="usuario" id="usuario" />
 
-								<label for="password">ContraseÃ±a</label>
+								<label for="password">Contraseña</label>
 								<input type="password" class="form-control" name="password" id="password" />
 
-								<label for="password2">Repita la contraseÃ±a</label>
+								<label for="password2">Repita la contraseña</label>
 								<input type="password2" class="form-control" name="password2" id="password2" />
 
 								<label for="matricula">Matricula(opcional)</label>
