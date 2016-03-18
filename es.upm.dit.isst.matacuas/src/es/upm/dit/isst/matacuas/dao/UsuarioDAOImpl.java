@@ -73,6 +73,20 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			em.close();
 		}
 	}
+
+	@Override
+	public Usuario getUsuario(String nusuario, String contraseña) {
+			EntityManager em = EMFService.get().createEntityManager();
+			Query q = em.createQuery("select u from Usuario u where u.nusuario = :nusuario and u.contraseña = :contraseña");
+			q.setParameter("nusuario", nusuario);
+			q.setParameter("contraseña", contraseña);
+			List<Usuario> lista = q.getResultList();
+			if(lista.isEmpty()){
+				return null;
+			}
+			Usuario usuario = lista.get(0);
+			return usuario;
+	}
 	
 }
 
