@@ -61,13 +61,14 @@ public class RegistroServlet extends HttpServlet {
 		dao.add(nusuario, nombre, apellidos,
 				password, matricula);
 		
-		System.out.println("Usuario creado");
-		
 		/*
 		 * Se crea sesión
 		 * Puede que se añadan más parametros
 		 */
 		req.getSession().setAttribute("nUsuario", nusuario);
+		
+		req.getSession().setAttribute("mensajeInfo", "Registro de usuario completado");
+		
 		RequestDispatcher view = req.getRequestDispatcher("main.jsp");
         view.forward(req, resp);
 	}

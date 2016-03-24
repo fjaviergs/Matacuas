@@ -1,7 +1,9 @@
 <%@include file="includes/cabecera1.jsp" %>
 <%@include file="includes/cabecera2.jsp" %>	
 			
-			<%@include file="includes/menu.jsp" %>	
+			<%@include file="includes/menu.jsp" %>
+			
+			<%@include file="includes/avisoinfo.jsp" %>	
 			
 		<div class="container row col-md-6 col-md-offset-3" id="main_div">
 			<!-- Se ven reportes estilo |Foto|Descripción|Mapa| -->

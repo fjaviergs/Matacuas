@@ -6,13 +6,15 @@
 		
 <%@include file="includes/cabecera2.jsp" %>	
 
-		<%@include file="includes/menu.jsp" %>			
+		<%@include file="includes/menu.jsp" %>
+		
+		<%@include file="includes/avisoerror.jsp" %>			
 				
 		<div class="container row col-md-6 col-md-offset-3">
 		<h3>Reportar Matacuás</h3>
 					<form action="/reporte" method="post" accept-charset="utf-8">
 						<div class="form-group">
-								<input type="hidden" name="positivo" id="negativo" value="false">
+								<input type="hidden" name="positivo" id="positivo" value="false">
 								
 								<label for="matricula">Matricula</label>
 								<input type="text" class="form-control" name="matricula" id="matricula" />

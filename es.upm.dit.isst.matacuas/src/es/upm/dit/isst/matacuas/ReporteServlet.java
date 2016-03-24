@@ -86,9 +86,17 @@ public class ReporteServlet extends HttpServlet {
 		ReporteDAO dao = ReporteDAOImpl.getInstance();
 		dao.add(matricula, descripcion, lugar, esPositivo);
 		
-		System.out.println("Reporte creado");
-		
+		/*
+		 * Se continua sesión
+		 * Puede que se añadan más parametros
+		 */
 		req.getSession().setAttribute("nUsuario", nUsuario);
+		
+		/*
+		 * Puede mejorarse para dar distinto mensaje segun sea reporte positivo o negativo
+		 */
+		req.getSession().setAttribute("mensajeInfo", "Reporte creado con exito");
+		
 		RequestDispatcher view = req.getRequestDispatcher("main.jsp");
         view.forward(req, resp);
 	}
