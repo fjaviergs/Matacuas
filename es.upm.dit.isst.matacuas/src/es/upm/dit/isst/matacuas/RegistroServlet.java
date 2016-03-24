@@ -18,6 +18,10 @@ public class RegistroServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 
+		/*
+		 * recuperar datos del form
+		 */
+		
 		String nombre = quitaNulos(req.getParameter("nombre"));
 		String apellidos = quitaNulos(req.getParameter("apellidos"));
 		String nusuario = quitaNulos(req.getParameter("nusuario"));
@@ -27,7 +31,6 @@ public class RegistroServlet extends HttpServlet {
 
 		/*
 		 * Validaciones en servidor
-		 * falta avisar del fallo
 		 */
 		
 		if (nusuario == ""){
@@ -60,6 +63,10 @@ public class RegistroServlet extends HttpServlet {
 		
 		System.out.println("Usuario creado");
 		
+		/*
+		 * Se crea sesión
+		 * Puede que se añadan más parametros
+		 */
 		req.getSession().setAttribute("nUsuario", nusuario);
 		RequestDispatcher view = req.getRequestDispatcher("main.jsp");
         view.forward(req, resp);

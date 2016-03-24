@@ -56,7 +56,12 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		System.out.println("Usuario logueado");
+		/*
+		 * Se crea sesión
+		 * Puede que se añadan más parametros
+		 */
 		req.getSession().setAttribute("nUsuario", usuario.getNUsuario());
+		
 		RequestDispatcher view = req.getRequestDispatcher("main.jsp");
         view.forward(req, resp);
 	}

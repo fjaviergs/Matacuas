@@ -10,9 +10,10 @@
 				
 		<div class="container row col-md-6 col-md-offset-3">
 		<h3>Reportar Matacuás</h3>
-					<form action="main.jsp" method="post" accept-charset="utf-8">
+					<form action="/reporte" method="post" accept-charset="utf-8">
 						<div class="form-group">
-							
+								<input type="hidden" name="positivo" id="negativo" value="false">
+								
 								<label for="matricula">Matricula</label>
 								<input type="text" class="form-control" name="matricula" id="matricula" />
 							
@@ -23,10 +24,10 @@
 							
 								<label for="lugar">Lugar del incidente</label>
 								<div id="mapa"></div>
-								<textarea rows="1" class="form-control" name="state"
-										id="state"></textarea>
+								<textarea rows="1" class="form-control" name="lugar"
+										id="lugar"></textarea>
 								<label for="foto">Fotografía</label>
-								<input type="file" name="pic" accept="image/*" class="btn btn-success"; capture="camera">
+								<input type="file" name="pic" id="pic" accept="image/*" class="btn btn-success"; capture="camera">
 								<br>
 								<input type="submit"
 								 value="Reportar" class="btn btn-info"/>
