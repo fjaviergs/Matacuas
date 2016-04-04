@@ -12,16 +12,12 @@ public interface UsuarioDAO {
 
 	public List<Usuario> listUsuarios();
 	
-	public void add (String nusuario, String nombre, String apellidos,
-			String contraseña, String matricula);
+	public void add (String googleID, String matricula);
 	
-	public void update (Long id, String nusuario, String nombre, String apellidos,
-			String contraseña, String matricula);
+	public void update (String googleID, String matricula);
 	
-	public Usuario getUsuario(Long usuarioId);
-	
-	public Usuario getUsuario(String nusuario, String contraseña);	
+	public Usuario getUsuario(String googleID);
 
-	public void remove (Long id);
+	public void remove (String googleID);
 			
 }

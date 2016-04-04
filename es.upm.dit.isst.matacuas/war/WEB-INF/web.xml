@@ -3,24 +3,7 @@
 xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-	<servlet>
-		<servlet-name>Es_upm_dit_isst_matacuas</servlet-name>
-		<servlet-class>es.upm.dit.isst.matacuas.Es_upm_dit_isst_matacuasServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Es_upm_dit_isst_matacuas</servlet-name>
-		<url-pattern>/es_upm_dit_isst_matacuas</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Registro</servlet-name>
-		<servlet-class>es.upm.dit.isst.matacuas.RegistroServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Registro</servlet-name>
-		<url-pattern>/registro</url-pattern>
-	</servlet-mapping>
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">	
 	
 		<servlet>
 		<servlet-name>Login</servlet-name>
@@ -38,9 +21,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>Reporte</servlet-name>
 		<url-pattern>/reporte</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping>	
+
 	
 	<welcome-file-list>
-		<welcome-file>login.jsp</welcome-file>
+		<welcome-file>Login</welcome-file>
 	</welcome-file-list>
 </web-app>

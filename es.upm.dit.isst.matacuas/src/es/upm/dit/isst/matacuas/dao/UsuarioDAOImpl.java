@@ -30,63 +30,42 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public void add(String nusuario, String nombre, String apellidos,
-			String contraseña, String matricula) {
+	public void add(String googleID, String matricula) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Usuario usuario = new Usuario(nusuario, nombre, apellidos,
-					contraseña, matricula);
+			Usuario usuario = new Usuario(googleID,matricula);
 			em.persist(usuario);
 			em.close();
 		}
 	}
 	
 	@Override
-	public void update(Long id, String nusuario, String nombre, String apellidos,
-			String contraseña, String matricula) {
+	public void update(String googleID, String matricula) {
 		EntityManager em = EMFService.get().createEntityManager();
-		Usuario usuario = em.find(Usuario.class, id);
-		usuario.setNUsuario(nusuario);
-		usuario.setNombre(nombre);
-		usuario.setApellidos(apellidos);
-		usuario.setContraseña(contraseña);
+		Usuario usuario = em.find(Usuario.class, googleID);
 		usuario.setMatricula(matricula);
 		em.merge(usuario);
 		em.close();
 	}
 
 	@Override
-	public Usuario getUsuario(Long id) {
+	public Usuario getUsuario(String googleID) {
 		EntityManager em = EMFService.get().createEntityManager();
-		Usuario usuario = em.find(Usuario.class, id);
+		Usuario usuario = em.find(Usuario.class, googleID);
 		return usuario;
 	}
 	
 
 	@Override
-	public void remove(Long id) {
+	public void remove(String googleID) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
-			Usuario usuario = em.find(Usuario.class, id);
+			Usuario usuario = em.find(Usuario.class, googleID);
 			em.remove(usuario);
 		} finally {
 			em.close();
 		}
 	}
 
-	@Override
-	public Usuario getUsuario(String nusuario, String contraseña) {
-			EntityManager em = EMFService.get().createEntityManager();
-			Query q = em.createQuery("select u from Usuario u where u.nusuario = :nusuario and u.contraseña = :contraseña");
-			q.setParameter("nusuario", nusuario);
-			q.setParameter("contraseña", contraseña);
-			List<Usuario> lista = q.getResultList();
-			if(lista.isEmpty()){
-				return null;
-			}
-			Usuario usuario = lista.get(0);
-			return usuario;
-	}
-	
 }
 

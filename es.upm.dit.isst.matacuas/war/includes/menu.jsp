@@ -10,14 +10,14 @@
     <li><a href="premiar.jsp">Premiar conductor</a></li>
     <li><a href="perfil.jsp">Modificar perfil</a></li>
     <li role="separator" class="divider"></li>
-    <li><a href="login.jsp">Cerrar sesión</a></li>
+    <li><a href="${urlLogOut}">Cerrar sesión</a></li>
   </ul>
 	</div>
 </div>
 <div class="container col-md-3">
-<c:if test="${nUsuario != null }">
+<c:if test="${email != null }">
 	<div class="list-group-item list-group-item-info text-center">
-	Logueado como ${nUsuario}
+	Logueado como ${email}
 	</div>
 </c:if>
 </div>
