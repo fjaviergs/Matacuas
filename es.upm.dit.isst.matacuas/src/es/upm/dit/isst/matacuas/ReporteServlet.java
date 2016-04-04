@@ -22,7 +22,7 @@ public class ReporteServlet extends HttpServlet {
 		 * para mantener sesion
 		 * probablemente se añadan más parametros de sesión
 		 */
-		String nUsuario = req.getParameter("nUsuario");
+		String googleID = req.getParameter("googleID");
 		
 		/*
 		 * recuperar datos del form
@@ -86,12 +86,7 @@ public class ReporteServlet extends HttpServlet {
 		ReporteDAO dao = ReporteDAOImpl.getInstance();
 		dao.add(matricula, descripcion, lugar, esPositivo);
 		
-		/*
-		 * Se continua sesión
-		 * Puede que se añadan más parametros
-		 */
-		req.getSession().setAttribute("nUsuario", nUsuario);
-		
+
 		/*
 		 * Puede mejorarse para dar distinto mensaje segun sea reporte positivo o negativo
 		 */

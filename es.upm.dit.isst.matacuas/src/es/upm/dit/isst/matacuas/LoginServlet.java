@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
@@ -28,11 +27,11 @@ public class LoginServlet extends HttpServlet {
         String thisURL = req.getRequestURI();
 
         if (req.getUserPrincipal() != null) {
-            String userID = userService.getCurrentUser().getUserId();
+            String googleID = userService.getCurrentUser().getUserId();
             String email = userService.getCurrentUser().getEmail();
             String urlLogOut = userService.createLogoutURL(thisURL);
             
-            req.getSession().setAttribute("userId", userID);
+            req.getSession().setAttribute("googleID", googleID);
             req.getSession().setAttribute("email", email);
             req.getSession().setAttribute("urlLogOut", urlLogOut);
     		

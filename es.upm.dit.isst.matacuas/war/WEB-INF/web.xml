@@ -21,6 +21,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>Reporte</servlet-name>
 		<url-pattern>/reporte</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Perfil</servlet-name>
+		<servlet-class>es.upm.dit.isst.matacuas.PerfilServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Perfil</servlet-name>
+		<url-pattern>/perfil</url-pattern>
 	</servlet-mapping>	
 
 	

@@ -6,9 +6,11 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+  <li><a href="main.jsp">Pagina principal</a></li>
+      <li role="separator" class="divider"></li>
     <li><a href="matacuas.jsp">Reportar Matacuás</a></li>
     <li><a href="premiar.jsp">Premiar conductor</a></li>
-    <li><a href="perfil.jsp">Modificar perfil</a></li>
+    <li><a href="/perfil">Modificar perfil</a></li>
     <li role="separator" class="divider"></li>
     <li><a href="${urlLogOut}">Cerrar sesión</a></li>
   </ul>
@@ -17,7 +19,7 @@
 <div class="container col-md-3">
 <c:if test="${email != null }">
 	<div class="list-group-item list-group-item-info text-center">
-	Logueado como ${email}
+	Logueado con ${email}
 	</div>
 </c:if>
 </div>
