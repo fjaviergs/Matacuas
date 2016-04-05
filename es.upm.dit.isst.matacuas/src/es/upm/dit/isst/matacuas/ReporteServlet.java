@@ -20,13 +20,24 @@ public class ReporteServlet extends HttpServlet {
 		
 		/*
 		 * recuperar datos del form
-		 * falta almacenar la foto (cambiar base de datos de reportes)
 		 */		
 		String matricula = quitaNulos(req.getParameter("matricula"));
 		String descripcion = quitaNulos(req.getParameter("descripcion"));
 		String lugar = quitaNulos(req.getParameter("lugar"));
+		
+		/*
+		 * Recupero la imagen y la almaceno como byte[]
+		 * falta testear
+		 */
+		byte[] imagen;
+		String imagenString = quitaNulos(req.getParameter("pic"));
+		if (imagenString.equals("")){
+		imagen=null;	
+		}else{
+		imagen = imagenString.getBytes();
+		}
+		
 		Boolean esPositivo;
-	//	String pic = quitaNulos(req.getParameter("pic"));
 		if (req.getParameter("positivo").equals("true")){
 			esPositivo=true;
 		}else{
@@ -76,7 +87,7 @@ public class ReporteServlet extends HttpServlet {
 		}
 		
 		ReporteDAO dao = ReporteDAOImpl.getInstance();
-		dao.add(matricula, descripcion, lugar, esPositivo);
+		dao.add(matricula, descripcion, lugar, imagen, esPositivo);
 		
 
 		/*

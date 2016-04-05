@@ -18,14 +18,16 @@ public class Reporte implements Serializable {
 	private String matricula;
 	private String descripcion; 
 	private String lugar;
+	private byte[] imagen;
 	private boolean esPositivo;
 	
 	
-	public Reporte(String matricula, String descripcion, String lugar,
+	public Reporte(String matricula, String descripcion, String lugar, byte[] imagen,
 			boolean esPositivo) {
 		this.matricula = matricula;
 		this.descripcion = descripcion;
 		this.lugar = lugar;
+		this.imagen = imagen;
 		this.esPositivo = esPositivo;
 	}
 	
@@ -71,6 +73,14 @@ public class Reporte implements Serializable {
 	
 	public static Long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
 	}
 
 }
