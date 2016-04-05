@@ -17,17 +17,11 @@ public class ReporteServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
-
-		/*
-		 * para mantener sesion
-		 * probablemente se añadan más parametros de sesión
-		 */
-		String googleID = req.getParameter("googleID");
 		
 		/*
 		 * recuperar datos del form
-		 */
-		
+		 * falta almacenar la foto (cambiar base de datos de reportes)
+		 */		
 		String matricula = quitaNulos(req.getParameter("matricula"));
 		String descripcion = quitaNulos(req.getParameter("descripcion"));
 		String lugar = quitaNulos(req.getParameter("lugar"));
@@ -41,9 +35,7 @@ public class ReporteServlet extends HttpServlet {
 
 		/*
 		 * Validaciones en servidor
-		 * falta avisar del fallo
-		 */
-		
+		 */		
 		if (matricula == ""){
 			//matricula en blanco en blanco
 			req.getSession().setAttribute("mensajeError", "Indroduce la matricula");
@@ -91,6 +83,7 @@ public class ReporteServlet extends HttpServlet {
 		 * Puede mejorarse para dar distinto mensaje segun sea reporte positivo o negativo
 		 */
 		req.getSession().setAttribute("mensajeInfo", "Reporte creado con exito");
+		req.getSession().setAttribute("mensajeError", null);
 		
 		RequestDispatcher view = req.getRequestDispatcher("main.jsp");
         view.forward(req, resp);
@@ -99,6 +92,9 @@ public class ReporteServlet extends HttpServlet {
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
+		
+		req.getSession().setAttribute("mensajeInfo", null);
+		req.getSession().setAttribute("mensajeError", null);
 
 		RequestDispatcher view = req.getRequestDispatcher("registro.jsp");
         view.forward(req, resp);

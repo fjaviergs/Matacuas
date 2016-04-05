@@ -13,7 +13,6 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 import es.upm.dit.isst.matacuas.dao.UsuarioDAO;
 import es.upm.dit.isst.matacuas.dao.UsuarioDAOImpl;
-import es.upm.dit.isst.matacuas.model.Usuario;
 
 public class LoginServlet extends HttpServlet {
 
@@ -22,6 +21,10 @@ public class LoginServlet extends HttpServlet {
 	@Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException, ServletException {
+		
+		req.getSession().setAttribute("mensajeInfo", null);
+		req.getSession().setAttribute("mensajeError", null);
+		
 		UserService userService = UserServiceFactory.getUserService();
 
         String thisURL = req.getRequestURI();
@@ -30,6 +33,15 @@ public class LoginServlet extends HttpServlet {
             String googleID = userService.getCurrentUser().getUserId();
             String email = userService.getCurrentUser().getEmail();
             String urlLogOut = userService.createLogoutURL(thisURL);
+            
+            /*
+             * Compruebo si existe el usuario en la base de datos
+             * si no existe lo almaceno
+             */           
+            UsuarioDAO dao = UsuarioDAOImpl.getInstance();
+    		if(dao.getUsuario(googleID) == null){
+    			dao.add(googleID, "");
+    		} 
             
             req.getSession().setAttribute("googleID", googleID);
             req.getSession().setAttribute("email", email);

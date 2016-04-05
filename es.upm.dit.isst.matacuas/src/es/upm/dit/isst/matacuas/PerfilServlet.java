@@ -68,6 +68,7 @@ public class PerfilServlet extends HttpServlet {
 		 * aviso de actualización de perfil
 		 */
 		req.getSession().setAttribute("mensajeInfo", "Perfil actualizado con exito");
+		req.getSession().setAttribute("mensajeError", null);
 		
 		RequestDispatcher view = req.getRequestDispatcher("main.jsp");
         view.forward(req, resp);
@@ -96,7 +97,10 @@ public class PerfilServlet extends HttpServlet {
 		
 		if(usuario !=null){
 			req.getSession().setAttribute("miMatricula", usuario.getMatricula());
-		}	
+		}
+		
+		req.getSession().setAttribute("mensajeInfo", null);
+		req.getSession().setAttribute("mensajeError", null);
         
 		RequestDispatcher view = req.getRequestDispatcher("perfil.jsp");
         view.forward(req, resp);
