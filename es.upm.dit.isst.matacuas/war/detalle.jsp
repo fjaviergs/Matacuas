@@ -23,7 +23,7 @@
 		</div>
 		<div class="botones">
 			<button type="button" class="btn btn-info" onclick="location.href='main.jsp'">Volver</button>
-			<c:if test="${reporte.esPositivo == false}"><button type="button" class="btn btn-success" onclick="location.href='respuesta.jsp'">Defenderse</button></c:if>
+			<c:if test="${defendible == true }"><c:if test="${reporte.esPositivo == false}"><button type="button" class="btn btn-success" onclick="location.href='respuesta.jsp'">Defenderse</button></c:if></c:if>
 		</div>
 		
 <%@include file="includes/footer.jsp" %>

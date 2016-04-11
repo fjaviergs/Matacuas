@@ -12,9 +12,9 @@ public interface UsuarioDAO {
 
 	public List<Usuario> listUsuarios();
 	
-	public void add (String googleID, String matricula);
+	public void add (String googleID, String email, String matricula);
 	
-	public void update (String googleID, String matricula);
+	public void update (String googleID, String email, String matricula);
 	
 	public Usuario getUsuario(String googleID);
 

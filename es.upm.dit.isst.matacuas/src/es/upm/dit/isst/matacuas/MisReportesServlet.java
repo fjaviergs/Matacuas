@@ -61,8 +61,10 @@ public class MisReportesServlet extends HttpServlet {
 			req.getSession().setAttribute("mensajeInfo", "No has introducido una matricula en tu cuenta");			
 		}else{
 		ReporteDAO reporteDao = ReporteDAOImpl.getInstance();
-		List<Reporte> reportes = reporteDao.getReportesConMatricula(matricula);
-		req.getSession().setAttribute("reportes", new ArrayList<Reporte>(reportes));
+		List<Reporte> recibidos = reporteDao.getReportesConMatricula(matricula);
+		List<Reporte> realizados = reporteDao.getReportesConGoogleID(googleID);
+		req.getSession().setAttribute("recibidos", new ArrayList<Reporte>(recibidos));
+		req.getSession().setAttribute("realizados", new ArrayList<Reporte>(realizados));
 		}
 		RequestDispatcher view = req.getRequestDispatcher("misreportes.jsp");
         view.forward(req, resp);

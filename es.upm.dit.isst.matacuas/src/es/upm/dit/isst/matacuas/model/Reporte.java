@@ -15,6 +15,7 @@ public class Reporte implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String googleID;
 	private String matricula;
 	private String descripcion; 
 	private String lugar;
@@ -22,15 +23,17 @@ public class Reporte implements Serializable {
 	private boolean esPositivo;
 	
 	
-	public Reporte(String matricula, String descripcion, String lugar, byte[] imagen,
-			boolean esPositivo) {
+	public Reporte(String googleID, String matricula, String descripcion,
+			String lugar, byte[] imagen, boolean esPositivo) {
+		super();
+		this.googleID = googleID;
 		this.matricula = matricula;
 		this.descripcion = descripcion;
 		this.lugar = lugar;
 		this.imagen = imagen;
 		this.esPositivo = esPositivo;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -82,5 +85,15 @@ public class Reporte implements Serializable {
 	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
 	}
+
+	public String getGoogleID() {
+		return googleID;
+	}
+
+	public void setGoogleID(String googleID) {
+		this.googleID = googleID;
+	}
+	
+	
 
 }

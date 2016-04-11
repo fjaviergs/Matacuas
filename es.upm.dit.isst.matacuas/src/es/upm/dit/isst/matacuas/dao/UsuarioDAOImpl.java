@@ -30,19 +30,20 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public void add(String googleID, String matricula) {
+	public void add(String googleID, String email, String matricula) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Usuario usuario = new Usuario(googleID,matricula);
+			Usuario usuario = new Usuario(googleID,email,matricula);
 			em.persist(usuario);
 			em.close();
 		}
 	}
 	
 	@Override
-	public void update(String googleID, String matricula) {
+	public void update(String googleID, String email, String matricula) {
 		EntityManager em = EMFService.get().createEntityManager();
 		Usuario usuario = em.find(Usuario.class, googleID);
+		usuario.setEmail(email);
 		usuario.setMatricula(matricula);
 		em.merge(usuario);
 		em.close();

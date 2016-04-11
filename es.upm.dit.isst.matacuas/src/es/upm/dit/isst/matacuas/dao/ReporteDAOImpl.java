@@ -29,19 +29,20 @@ public class ReporteDAOImpl implements ReporteDAO {
 	}
 
 	@Override
-	public void add(String matricula, String descripcion, String lugar, byte[] imagen, Boolean esPositivo) {
+	public void add(String googleID, String matricula, String descripcion, String lugar, byte[] imagen, Boolean esPositivo) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Reporte reporte = new Reporte(matricula, descripcion, lugar, imagen, esPositivo);
+			Reporte reporte = new Reporte(googleID, matricula, descripcion, lugar, imagen, esPositivo);
 			em.persist(reporte);
 			em.close();
 		}
 	}
 	
 	@Override
-	public void update(Long id, String matricula, String descripcion, String lugar, byte[] imagen, Boolean esPositivo) {
+	public void update(Long id, String googleID, String matricula, String descripcion, String lugar, byte[] imagen, Boolean esPositivo) {
 		EntityManager em = EMFService.get().createEntityManager();
 		Reporte reporte = em.find(Reporte.class, id);
+		reporte.setGoogleID(googleID);
 		reporte.setMatricula(matricula);
 		reporte.setDescripcion(descripcion);
 		reporte.setLugar(lugar);
@@ -75,6 +76,15 @@ public class ReporteDAOImpl implements ReporteDAO {
 		EntityManager em = EMFService.get().createEntityManager();
 		Query q = em.createQuery("select m from Reporte m where m.matricula = :matricula");
 		q.setParameter("matricula", matricula);
+		List<Reporte> reportes = q.getResultList();
+		return reportes;
+	}
+
+	@Override
+	public List<Reporte> getReportesConGoogleID(String googleID) {
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select m from Reporte m where m.googleID = :googleID");
+		q.setParameter("googleID", googleID);
 		List<Reporte> reportes = q.getResultList();
 		return reportes;
 	}

@@ -53,15 +53,16 @@ public class PerfilServlet extends HttpServlet {
 		}*/
 		
 		String googleID = userService.getCurrentUser().getUserId();
+		String email = userService.getCurrentUser().getEmail();
 		UsuarioDAO dao = UsuarioDAOImpl.getInstance();
 		/*
 		 * Si ya existe el usuario lo actualizo
 		 * Si no existe el usuario lo creo
 		 */
 		if(dao.getUsuario(googleID) == null){
-			dao.add(googleID, matricula);
+			dao.add(googleID, email, matricula);
 		} else {
-		dao.update(googleID, matricula);
+		dao.update(googleID, email, matricula);
 		}
 		
 		/*

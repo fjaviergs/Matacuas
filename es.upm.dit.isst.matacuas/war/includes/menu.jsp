@@ -8,7 +8,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
   <li><a href="main.jsp">Pagina principal</a></li>
       <li role="separator" class="divider"></li>
-    <li><a href="matacuas.jsp">Reportar Matacuás</a></li>
+    <li><a href="/reporte">Reportar Matacuás</a></li>
     <li><a href="premiar.jsp">Premiar conductor</a></li>
     <li><a href="/perfil">Modificar perfil</a></li>
     <li><a href="/misreportes">Consultar mis reportes</a></li>

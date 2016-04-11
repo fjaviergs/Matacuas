@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
              */           
             UsuarioDAO dao = UsuarioDAOImpl.getInstance();
     		if(dao.getUsuario(googleID) == null){
-    			dao.add(googleID, "");
+    			dao.add(googleID, email, "");
     		} 
             
             req.getSession().setAttribute("googleID", googleID);

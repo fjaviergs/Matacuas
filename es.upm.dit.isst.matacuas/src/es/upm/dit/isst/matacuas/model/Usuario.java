@@ -13,10 +13,12 @@ public class Usuario implements Serializable {
 	private static final Long serialVersionUID = 1L;
 	@Id
 	private String googleID;
+	private String email;
 	private String matricula;
 	
-	public Usuario(String googleID, String matricula) {
+	public Usuario(String googleID, String email, String matricula) {
 		this.googleID = googleID;
+		this.email = email;
 		this.matricula = matricula;
 	}
 
@@ -34,6 +36,14 @@ public class Usuario implements Serializable {
 
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
 import es.upm.dit.isst.matacuas.dao.ReporteDAO;
 import es.upm.dit.isst.matacuas.dao.ReporteDAOImpl;
 
@@ -17,6 +20,20 @@ public class ReporteServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
+		
+		UserService userService = UserServiceFactory.getUserService();
+
+		/*
+		 * compruebo sesión
+		 */
+        if (req.getUserPrincipal() == null) {
+        	// si no está logueado le doy la opción de hacerlo
+        	String thisURL = req.getRequestURI();
+            String urlLogIn = userService.createLoginURL(thisURL);
+            req.getSession().setAttribute("urlLogIn", urlLogIn); 
+            RequestDispatcher view = req.getRequestDispatcher("login.jsp");
+            view.forward(req, resp);
+        }
 		
 		/*
 		 * recuperar datos del form
@@ -86,8 +103,10 @@ public class ReporteServlet extends HttpServlet {
 	        return;
 		}
 		
+		String googleID = userService.getCurrentUser().getUserId();
+		
 		ReporteDAO dao = ReporteDAOImpl.getInstance();
-		dao.add(matricula, descripcion, lugar, imagen, esPositivo);
+		dao.add(googleID, matricula, descripcion, lugar, imagen, esPositivo);
 		
 
 		/*
@@ -104,10 +123,24 @@ public class ReporteServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		
+		UserService userService = UserServiceFactory.getUserService();
+
+		/*
+		 * compruebo sesión
+		 */
+        if (req.getUserPrincipal() == null) {
+        	// si no está logueado le doy la opción de hacerlo
+        	String thisURL = req.getRequestURI();
+            String urlLogIn = userService.createLoginURL(thisURL);
+            req.getSession().setAttribute("urlLogIn", urlLogIn); 
+            RequestDispatcher view = req.getRequestDispatcher("login.jsp");
+            view.forward(req, resp);
+        }
+		
 		req.getSession().setAttribute("mensajeInfo", null);
 		req.getSession().setAttribute("mensajeError", null);
 
-		RequestDispatcher view = req.getRequestDispatcher("registro.jsp");
+		RequestDispatcher view = req.getRequestDispatcher("matacuas.jsp");
         view.forward(req, resp);
 		
 	}

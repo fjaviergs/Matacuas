@@ -9,13 +9,15 @@ public interface ReporteDAO {
 
 	public List<Reporte> listReportes();
 	
-	public void add (String matricula, String descripcion, String lugar, byte[] imagen, Boolean esPositivo);
+	public void add (String googleID, String matricula, String descripcion, String lugar, byte[] imagen, Boolean esPositivo);
 	
-	public void update (Long id, String matricula, String descripcion, String lugar, byte[] imagen, Boolean esPositivo);
+	public void update (Long id, String googleID, String matricula, String descripcion, String lugar, byte[] imagen, Boolean esPositivo);
 	
 	public Reporte getReporte(Long reporteId);
 	
 	public List<Reporte> getReportesConMatricula(String matricula);
+	
+	public List<Reporte> getReportesConGoogleID(String googleID);
 
 	public void remove (Long id);
 			
