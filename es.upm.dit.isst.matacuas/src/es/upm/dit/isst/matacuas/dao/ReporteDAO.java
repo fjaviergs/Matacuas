@@ -1,6 +1,5 @@
 package es.upm.dit.isst.matacuas.dao;
 
-import java.util.HashMap;
 import java.util.List;
 
 import es.upm.dit.isst.matacuas.model.Reporte;
