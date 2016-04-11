@@ -22,10 +22,14 @@
     <tbody>
       <c:forEach items="${reportes}" var="reporte">
       <tr <c:choose><c:when test="${reporte.esPositivo == false}">class="danger"</c:when><c:when test="${reporte.esPositivo == true}">class="success"</c:when></c:choose>>
-      <td><c:out value="${reporte.matricula}" /></td>
-        <td><c:out value="${reporte.lugar}" /></td>
+      <td><c:out value="${reporte.matricula}"/></td>
+        <td><c:out value="${reporte.lugar}"/></td>
         <td><c:out value="${reporte.descripcion}" /></td>
-        <td><c:if test="${reporte.esPositivo == false}"><a class="btn btn-primary" href="<c:url value="respuesta.jsp" />">Defenderse</a></c:if></td>
+        <td><form action="/detalle" method="post">
+								<input type="hidden" name="id" id="id" value="${reporte.id}">								
+								<input type="submit" value="Ampliar" class="btn btn-primary"/>							
+					</form>
+<%--         <a class="btn btn-primary" href="<c:url value="/detalle?id=${reporte.id}"/>">Ampliar</a></td> --%>
       </tr>
 		</c:forEach>
     </tbody>

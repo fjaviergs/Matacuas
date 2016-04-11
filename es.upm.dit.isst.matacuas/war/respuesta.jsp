@@ -7,7 +7,7 @@
 		<h3>Responder reporte</h3>
 					<form action="main.jsp" method="post" accept-charset="utf-8">
 						<div class="form-group">
-							
+							<input type="hidden" id="id" name="id" value="<c:out value="${reporte.id}"/>"/>
 								<label for="descripcion">Texto de la respuesta</label>
 								<textarea rows="9" class="form-control" name="descripcion" 
 										id="descripcion"></textarea>
