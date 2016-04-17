@@ -18,18 +18,12 @@
 		<div id="img">
 			<img src="img/otro.jpg" class="foto">
 		</div>
-		<div class="descripcion" id="descripcion"><p>Lugar: <c:out value="${reporte.lugar}"/></p>
+		<div class="descripcion" id="descripcion"><p id="lugar">Lugar: <c:out value="${reporte.lugar}"/></p>
 		<c:out value="${reporte.descripcion}"/>
 		</div>
 		<div class="botones">
-			<button type="button" class="btn btn-info" onclick="location.href='main.jsp'">Volver</button>
-			<c:if test="${defendible == true }"><c:if test="${reporte.esPositivo == false}">
-			<form action="/defensa" method="post">
-								<input type="hidden" name="detalle" id="detalle" value="detalle">
-								<input type="hidden" name="ReporteID" id="ReporteID" value="${reporte.id}">							
-								<input type="submit" value="Defenderse" class="btn btn-success"/>							
-					</form>
-			</c:if></c:if>
+			<button type="button" class="btn btn-info" onclick="location.href='/main'">Volver</button>
+			<c:if test="${defendible == true }"><c:if test="${reporte.esPositivo == false}"><button type="button" class="btn btn-success" onclick="location.href='respuesta.jsp'">Defenderse</button></c:if></c:if>
 		</div>
 		
 <%@include file="includes/footer.jsp" %>

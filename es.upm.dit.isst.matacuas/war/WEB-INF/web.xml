@@ -49,6 +49,18 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Detalle</servlet-name>
 		<url-pattern>/detalle</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>Main</servlet-name>
+		<servlet-class>es.upm.dit.isst.matacuas.MainServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Main</servlet-name>
+		<url-pattern>/main</url-pattern>
+	</servlet-mapping>
+	
+	
 
 	
 	<welcome-file-list>
