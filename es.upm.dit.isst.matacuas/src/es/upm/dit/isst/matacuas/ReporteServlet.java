@@ -13,10 +13,25 @@ import com.google.appengine.api.users.UserServiceFactory;
 
 import es.upm.dit.isst.matacuas.dao.ReporteDAO;
 import es.upm.dit.isst.matacuas.dao.ReporteDAOImpl;
+import es.upm.dit.isst.matacuas.dao.UsuarioDAO;
+import es.upm.dit.isst.matacuas.dao.UsuarioDAOImpl;
+
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+
 
 public class ReporteServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final String emailAdmin = "matacuasg21@gmail.com";
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
@@ -103,10 +118,42 @@ public class ReporteServlet extends HttpServlet {
 	        return;
 		}
 		
-		String googleID = userService.getCurrentUser().getUserId();
+String googleID = userService.getCurrentUser().getUserId();
 		
-		ReporteDAO dao = ReporteDAOImpl.getInstance();
-		dao.add(googleID, matricula, descripcion, lugar, imagen, esPositivo);
+		ReporteDAO reporteDAO = ReporteDAOImpl.getInstance();
+		reporteDAO.add(googleID, matricula, descripcion, lugar, imagen, esPositivo);
+		
+		/*
+		 * envio un aviso por email
+		 */
+		UsuarioDAO usuarioDAO = UsuarioDAOImpl.getInstance();
+		String email = usuarioDAO.getEmailConMatricula(matricula);
+		
+		if(email != null){
+			//si existe un email asociado a la matricula procedo
+		Properties props = new Properties();
+		Session session = Session.getDefaultInstance(props, null);
+
+		String msgBody = "Descripción del reporte: " + descripcion;
+		String msgSubject = "Has recibido un reporte";
+		if (esPositivo = true){msgSubject = msgSubject + " positivo";}
+		else{msgSubject = msgSubject + " negativo";}
+
+		try {
+		    Message msg = new MimeMessage(session);
+		    msg.setFrom(new InternetAddress(emailAdmin, "Matacuas"));
+		    msg.addRecipient(Message.RecipientType.TO,
+		     new InternetAddress(email));
+		    msg.setSubject(msgSubject);
+		    msg.setText(msgBody);
+		    Transport.send(msg);
+
+		} catch (AddressException e) {
+		    // ...
+		} catch (MessagingException e) {
+		    // ...
+		}
+	}
 		
 
 		/*

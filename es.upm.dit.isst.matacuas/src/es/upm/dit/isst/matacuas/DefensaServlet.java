@@ -52,23 +52,8 @@ public class DefensaServlet extends HttpServlet {
             RequestDispatcher view = req.getRequestDispatcher("login.jsp");
             view.forward(req, resp);
         }
-		
-        /*
-         * Vengo desde detalle.jsp?
-         */
-        if(req.getParameter("detalle")!=null){
-        	//redirecciono a respuesta.jsp
-        	
-        	req.getSession().setAttribute("reporteID", req.getParameter("reporteID"));
-        	
-        	req.getSession().setAttribute("mensajeInfo", null);
-    		req.getSession().setAttribute("mensajeError", null);
-
-    		RequestDispatcher view = req.getRequestDispatcher("respuesta.jsp");
-            view.forward(req, resp);
-            return;
-        }
         
+
 		/*
 		 * recuperar datos del form
 		 */		

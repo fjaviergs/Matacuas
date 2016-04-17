@@ -68,5 +68,14 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 	}
 
+	@Override
+	public String getEmailConMatricula(String matricula) {
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select m.email from Usuario m where m.matricula = :matricula");
+		q.setParameter("matricula", matricula);
+		List<String> resultado = q.getResultList();
+		if(resultado.isEmpty()){return null;}else{return resultado.get(0);}
+	}
+
 }
 

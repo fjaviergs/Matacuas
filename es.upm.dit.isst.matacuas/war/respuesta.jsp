@@ -5,9 +5,10 @@
 				
 		<div class="container row col-md-6 col-md-offset-3">
 		<h3>Responder reporte</h3>
-					<form action="main.jsp" method="post" accept-charset="utf-8">
+					<form action="/defensa" method="post" accept-charset="utf-8">
 						<div class="form-group">
-							<input type="hidden" id="id" name="id" value="<c:out value="${reporte.id}"/>"/>
+							<input type="hidden" id="reporteID" name="reporteID" value="<c:out value="${reporte.id}"/>"/>
+<%-- 								<input type="hidden" id="reporteID" name="reporteID" value="<c:out value="${reporteID}"/>"/> --%>
 								<label for="descripcion">Texto de la respuesta</label>
 								<textarea rows="9" class="form-control" name="descripcion" 
 										id="descripcion"></textarea>
