@@ -72,6 +72,9 @@ function addMarker(lugar, esPositivo, reporteID) {
 	geocoder.geocode({
 		"address": lugar
 	}, function(results) {
+		if (results == null) {
+			return;
+		}
 		var marker = new google.maps.Marker({
 			position: results[0].geometry.location,
 			map: map,
