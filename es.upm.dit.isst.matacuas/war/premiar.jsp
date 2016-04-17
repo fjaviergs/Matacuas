@@ -26,7 +26,7 @@
 							
 								<label for="lugar">Lugar de la acción</label>
 								<div id="mapa"></div>
-								<textarea rows="1" class="form-control" name="lugar"
+								<textarea readonly rows="1" class="form-control" name="lugar"
 										id="lugar"></textarea>
 								<label for="foto">Fotografía</label>
 								<input type="file" name="pic" id="pic" accept="image/*" class="btn btn-success"; capture="camera">
