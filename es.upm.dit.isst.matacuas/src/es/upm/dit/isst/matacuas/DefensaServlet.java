@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
+import es.upm.dit.isst.matacuas.dao.DefensaDAO;
+import es.upm.dit.isst.matacuas.dao.DefensaDAOImpl;
 import es.upm.dit.isst.matacuas.dao.ReporteDAO;
 import es.upm.dit.isst.matacuas.dao.ReporteDAOImpl;
 import es.upm.dit.isst.matacuas.dao.UsuarioDAO;
 import es.upm.dit.isst.matacuas.dao.UsuarioDAOImpl;
+import es.upm.dit.isst.matacuas.model.Reporte;
 
 import java.util.Properties;
 
@@ -28,7 +31,7 @@ import javax.mail.internet.MimeMessage;
 
 
 
-public class ReporteServlet extends HttpServlet {
+public class DefensaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static final String emailAdmin = "matacuasg21@gmail.com";
@@ -50,94 +53,59 @@ public class ReporteServlet extends HttpServlet {
             view.forward(req, resp);
         }
 		
+        /*
+         * Vengo desde detalle.jsp?
+         */
+        if(req.getParameter("detalle")!=null){
+        	//redirecciono a respuesta.jsp
+        	
+        	req.getSession().setAttribute("reporteID", req.getParameter("reporteID"));
+        	
+        	req.getSession().setAttribute("mensajeInfo", null);
+    		req.getSession().setAttribute("mensajeError", null);
+
+    		RequestDispatcher view = req.getRequestDispatcher("respuesta.jsp");
+            view.forward(req, resp);
+            return;
+        }
+        
 		/*
 		 * recuperar datos del form
 		 */		
-		String matricula = quitaNulos(req.getParameter("matricula"));
 		String descripcion = quitaNulos(req.getParameter("descripcion"));
-		String lugar = quitaNulos(req.getParameter("lugar"));
-		
-		/*
-		 * Recupero la imagen y la almaceno como byte[]
-		 * falta testear
-		 */
-		byte[] imagen;
-		String imagenString = quitaNulos(req.getParameter("pic"));
-		if (imagenString.equals("")){
-		imagen=null;	
-		}else{
-		imagen = imagenString.getBytes();
-		}
-		
-		Boolean esPositivo;
-		if (req.getParameter("positivo").equals("true")){
-			esPositivo=true;
-		}else{
-			esPositivo=false;
-		}
+		long reporteID = Long.parseLong(req.getParameter("reporteID"));
 
 		/*
 		 * Validaciones en servidor
 		 */		
-		if (matricula == ""){
-			//matricula en blanco en blanco
-			req.getSession().setAttribute("mensajeError", "Indroduce la matricula");
-			if(esPositivo){
-				RequestDispatcher view = req.getRequestDispatcher("premiar.jsp");
-		        view.forward(req, resp);	
-			}else{
-			RequestDispatcher view = req.getRequestDispatcher("matacuas.jsp");
-	        view.forward(req, resp);
-			}
-	        return;
-		}
-
 		if(descripcion == ""){
 			//descripcion en blanco
 			req.getSession().setAttribute("mensajeError", "escribe una descripción");
-			if(esPositivo){
-				RequestDispatcher view = req.getRequestDispatcher("premiar.jsp");
+				RequestDispatcher view = req.getRequestDispatcher("respuesta.jsp");
 		        view.forward(req, resp);	
-			}else{
-			RequestDispatcher view = req.getRequestDispatcher("matacuas.jsp");
-	        view.forward(req, resp);
-			}
-	        return;
-		}
-		
-		if(lugar==""){
-			//lugar en blanco
-			req.getSession().setAttribute("mensajeError", "indica el lugar");
-			if(esPositivo){
-				RequestDispatcher view = req.getRequestDispatcher("premiar.jsp");
-		        view.forward(req, resp);	
-			}else{
-			RequestDispatcher view = req.getRequestDispatcher("matacuas.jsp");
-	        view.forward(req, resp);
-			}
 	        return;
 		}
 		
 String googleID = userService.getCurrentUser().getUserId();
 		
 		ReporteDAO reporteDAO = ReporteDAOImpl.getInstance();
-		reporteDAO.add(googleID, matricula, descripcion, lugar, imagen, esPositivo);
+		Reporte reporte = reporteDAO.getReporte(reporteID);
+		DefensaDAO defensaDAO = DefensaDAOImpl.getInstance();
+		defensaDAO.add(reporteID, googleID, descripcion);
 		
 		/*
 		 * envio un aviso por email
 		 */
 		UsuarioDAO usuarioDAO = UsuarioDAOImpl.getInstance();
-		String email = usuarioDAO.getEmailConMatricula(matricula);
+		String email = usuarioDAO.getEmailConMatricula(reporte.getMatricula());
 		
 		if(email != null){
 			//si existe un email asociado a la matricula procedo
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 
-		String msgBody = "Descripción del reporte: " + descripcion;
-		String msgSubject = "Has recibido un reporte";
-		if (esPositivo = true){msgSubject = msgSubject + " positivo";}
-		else{msgSubject = msgSubject + " negativo";}
+		String msgBody = "Descripción de la defensa: " + descripcion;
+		String msgSubject = "Se ha recibido una defensa a tu reporte";
 
 		try {
 		    Message msg = new MimeMessage(session);
@@ -159,39 +127,12 @@ String googleID = userService.getCurrentUser().getUserId();
 		/*
 		 * Puede mejorarse para dar distinto mensaje segun sea reporte positivo o negativo
 		 */
-		req.getSession().setAttribute("mensajeInfo", "Reporte creado con exito");
+		req.getSession().setAttribute("mensajeInfo", "Defensa enviada con exito");
 		req.getSession().setAttribute("mensajeError", null);
 		
 		RequestDispatcher view = req.getRequestDispatcher("main.jsp");
         view.forward(req, resp);
 	}
-	
-	
-	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException, ServletException {
-		
-		UserService userService = UserServiceFactory.getUserService();
-
-		/*
-		 * compruebo sesión
-		 */
-        if (req.getUserPrincipal() == null) {
-        	// si no está logueado le doy la opción de hacerlo
-        	String thisURL = req.getRequestURI();
-            String urlLogIn = userService.createLoginURL(thisURL);
-            req.getSession().setAttribute("urlLogIn", urlLogIn); 
-            RequestDispatcher view = req.getRequestDispatcher("login.jsp");
-            view.forward(req, resp);
-        }
-		
-		req.getSession().setAttribute("mensajeInfo", null);
-		req.getSession().setAttribute("mensajeError", null);
-
-		RequestDispatcher view = req.getRequestDispatcher("matacuas.jsp");
-        view.forward(req, resp);
-		
-	}
-
 
 	private String quitaNulos(String string) {
 		if (string == null) {

@@ -17,6 +17,8 @@ public interface UsuarioDAO {
 	public void update (String googleID, String email, String matricula);
 	
 	public Usuario getUsuario(String googleID);
+	
+	public String getEmailConMatricula(String matricula);
 
 	public void remove (String googleID);
 			
