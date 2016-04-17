@@ -91,11 +91,11 @@ function addMarker(lugar, esPositivo, reporteID) {
 function getReportes() {
 	var n = 0;
 	while (true) {
-		reportes[n] = document.getElementById("reporte"+n).value;
-		n++;
 		if (document.getElementById("reporte"+n) == null) {
 			break;
 		}
+		reportes[n] = document.getElementById("reporte"+n).value;
+		n++;
 	}
 }
 
