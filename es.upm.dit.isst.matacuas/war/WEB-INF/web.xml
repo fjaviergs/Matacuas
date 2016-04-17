@@ -4,7 +4,16 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">	
-	
+	<security-constraint>
+    <web-resource-collection>
+        <web-resource-name>everything</web-resource-name>
+        <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+</security-constraint>
+
 		<servlet>
 		<servlet-name>Login</servlet-name>
 		<servlet-class>es.upm.dit.isst.matacuas.LoginServlet</servlet-class>
@@ -50,16 +59,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/detalle</url-pattern>
 	</servlet-mapping>
 	
+	
 	<servlet>
-		<servlet-name>Defensa</servlet-name>
-		<servlet-class>es.upm.dit.isst.matacuas.DefensaServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Defensa</servlet-name>
-		<url-pattern>/defensa</url-pattern>
-	</servlet-mapping>
-
-<servlet>
 		<servlet-name>Main</servlet-name>
 		<servlet-class>es.upm.dit.isst.matacuas.MainServlet</servlet-class>
 	</servlet>
@@ -67,6 +68,9 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Main</servlet-name>
 		<url-pattern>/main</url-pattern>
 	</servlet-mapping>
+	
+	
+
 	
 	<welcome-file-list>
 		<welcome-file>Login</welcome-file>
