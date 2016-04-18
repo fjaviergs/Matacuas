@@ -115,7 +115,7 @@ String googleID = userService.getCurrentUser().getUserId();
 		req.getSession().setAttribute("mensajeInfo", "Defensa enviada con exito");
 		req.getSession().setAttribute("mensajeError", null);
 		
-		RequestDispatcher view = req.getRequestDispatcher("main.jsp");
+		RequestDispatcher view = req.getRequestDispatcher("redirect.jsp");
         view.forward(req, resp);
 	}
 

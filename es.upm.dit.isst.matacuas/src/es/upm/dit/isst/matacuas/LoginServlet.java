@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
             req.getSession().setAttribute("email", email);
             req.getSession().setAttribute("urlLogOut", urlLogOut);
     		
-    		RequestDispatcher view = req.getRequestDispatcher("main.jsp");
+    		RequestDispatcher view = req.getRequestDispatcher("redirect.jsp");
             view.forward(req, resp);
             
         } else {

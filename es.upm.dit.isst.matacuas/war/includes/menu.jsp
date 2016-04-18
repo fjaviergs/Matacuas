@@ -6,7 +6,7 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-  <li><a href="main.jsp">Pagina principal</a></li>
+  <li><a href="/main">Pagina principal</a></li>
       <li role="separator" class="divider"></li>
     <li><a href="/reporte">Reportar Matacuás</a></li>
     <li><a href="premiar.jsp">Premiar conductor</a></li>
