@@ -1,12 +1,24 @@
 <%@include file="includes/cabecera1.jsp" %>
+<style>
+html, 
+body {
+    height: 100%;
+}
+.separado{
+margin-top: 10%;
+height:90%;
+}
+</style>
 <%@include file="includes/cabecera2.jsp" %>
-		
-<%@include file="includes/avisoerror.jsp" %>
-				
-		<div class="container row col-md-6 col-md-offset-3">
+
+<div class ="container text-center separado">
+ 
+<div class = "row">
+        <img src="img/logo.png" class="img-responsive center-block">
+    </div>  
+    <div class = "row">  
+           <a href="${urlLogIn}" class="btn btn-success text-centered" role="button">Acceder</a>
+</div>
+</div>
 	
-								<a href="${urlLogIn}" class="btn btn-info" role="button">Acceder</a>
-							
-		</div>
-		
 <%@include file="includes/footer.jsp" %>

@@ -67,11 +67,10 @@ public class DetalleServlet extends HttpServlet {
 		
 		byte[] imagen = reporte.getImagen();
 		String urlImagen = "img/sin-imagen.jpg";
-		if(imagen != null && imagen.length>1){
-			System.out.println("foto no nula");
+		if(imagen != null && imagen.length>0){
+
 		urlImagen = "data:image/jpeg;base64," + DatatypeConverter.printBase64Binary(imagen);
 		}else{
-			System.out.println("foto nula");
 			urlImagen = "img/sin-imagen.jpg";
 		}
 		

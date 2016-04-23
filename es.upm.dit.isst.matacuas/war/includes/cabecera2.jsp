@@ -1,6 +1,4 @@
 <meta charset="utf-8">
 	</head>
-	<body class="main2">
-	
+	<body class="main">	
 		 <div class="container">
-				<h1>Matacuás</h1>
