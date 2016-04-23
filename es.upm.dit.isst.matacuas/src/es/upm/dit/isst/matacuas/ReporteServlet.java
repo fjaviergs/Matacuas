@@ -56,14 +56,14 @@ public class ReporteServlet extends HttpServlet {
 		String matricula = quitaNulos(req.getParameter("matricula"));
 		String descripcion = quitaNulos(req.getParameter("descripcion"));
 		String lugar = quitaNulos(req.getParameter("lugar"));
+		String imagenString = quitaNulos(req.getParameter("pic"));
 		
 		/*
 		 * Recupero la imagen y la almaceno como byte[]
 		 * falta testear
 		 */
 		byte[] imagen;
-		String imagenString = quitaNulos(req.getParameter("pic"));
-		if (imagenString.equals("")){
+		if (imagenString == null || imagenString.equals("")){
 		imagen=null;	
 		}else{
 		imagen = imagenString.getBytes();
@@ -121,6 +121,7 @@ public class ReporteServlet extends HttpServlet {
 String googleID = userService.getCurrentUser().getUserId();
 		
 		ReporteDAO reporteDAO = ReporteDAOImpl.getInstance();
+			System.out.println("con foto");
 		reporteDAO.add(googleID, matricula, descripcion, lugar, imagen, esPositivo);
 		
 		/*

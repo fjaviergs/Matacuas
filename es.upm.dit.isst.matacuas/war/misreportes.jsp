@@ -6,7 +6,7 @@
 			<%@include file="includes/avisoinfo.jsp" %>	
 
 	<div class="container row col-md-12">
-	<div class="container row col-md-4 col-md-offset-1">			
+	<div class="container row col-md-10 col-md-offset-1">			
 			<h3>Mis reportes recibidos</h3>	
 			<c:if test="${recibidos != null }">
 			<p>Número de reportes recibidos: <c:out value="${fn:length(recibidos)}"/></p>
@@ -38,7 +38,7 @@
 			</c:if>
 	</div>
 	
-	<div class="container row col-md-4 col-md-offset-1">			
+	<div class="container row col-md-10 col-md-offset-1">			
 			<h3>Mis reportes realizados</h3>	
 					
 			<c:if test="${realizados != null }">

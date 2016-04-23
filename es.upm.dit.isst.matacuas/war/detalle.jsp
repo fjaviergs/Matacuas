@@ -16,7 +16,7 @@
 		<h3 class="titulo">Reporte <c:if test="${reporte.esPositivo == false}">negativo </c:if><c:if test="${reporte.esPositivo == true}">positivo </c:if>sobre <c:out value="${reporte.matricula}"/></h3>
 		<div id="mapa"></div>
 		<div id="img">
-			<img src="img/otro.jpg" class="foto">
+			<img src="<c:out value="${imagen}"/>" class="foto">
 		</div>
 		<div class="descripcion" id="descripcion"><p id="lugar">Lugar: <c:out value="${reporte.lugar}"/></p>
 		<c:out value="${reporte.descripcion}"/>

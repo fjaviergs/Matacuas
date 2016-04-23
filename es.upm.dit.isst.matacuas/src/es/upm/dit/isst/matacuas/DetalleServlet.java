@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+
+import javax.xml.bind.DatatypeConverter;
+
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
@@ -60,6 +64,18 @@ public class DetalleServlet extends HttpServlet {
 		}
 
 		req.getSession().setAttribute("reporte", reporte);
+		
+		byte[] imagen = reporte.getImagen();
+		String urlImagen = "img/sin-imagen.jpg";
+		if(imagen != null && imagen.length>1){
+			System.out.println("foto no nula");
+		urlImagen = "data:image/jpeg;base64," + DatatypeConverter.printBase64Binary(imagen);
+		}else{
+			System.out.println("foto nula");
+			urlImagen = "img/sin-imagen.jpg";
+		}
+		
+		req.getSession().setAttribute("imagen", urlImagen);
 		
 		RequestDispatcher view = req.getRequestDispatcher("detalle.jsp");
         view.forward(req, resp);
