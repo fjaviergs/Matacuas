@@ -41,6 +41,10 @@ public class LoginServlet extends HttpServlet {
             UsuarioDAO dao = UsuarioDAOImpl.getInstance();
     		if(dao.getUsuario(googleID) == null){
     			dao.add(googleID, email, "");
+    			if (userService.isUserAdmin()){
+    				//es administrador
+    				req.getSession().setAttribute("admin", true);
+    			}
     		} 
             
             req.getSession().setAttribute("googleID", googleID);

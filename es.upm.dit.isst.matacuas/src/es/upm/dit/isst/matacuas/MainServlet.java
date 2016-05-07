@@ -32,6 +32,24 @@ public class MainServlet extends HttpServlet {
 		req.getSession().setAttribute("reportes", null);
 		req.getSession().setAttribute("mensajeError", null);
 		req.getSession().setAttribute("count", null);
+		req.getSession().setAttribute("admin", null);
+
+UserService userService = UserServiceFactory.getUserService();
+		
+		/*
+		 * compruebo sesión
+		 */
+        if (req.getUserPrincipal() == null) {
+        	// si no está logueado le doy la opción de hacerlo
+        	String thisURL = req.getRequestURI();
+            String urlLogIn = userService.createLoginURL(thisURL);
+            req.getSession().setAttribute("urlLogIn", urlLogIn); 
+            RequestDispatcher view = req.getRequestDispatcher("login.jsp");
+            view.forward(req, resp);
+        }else if(userService.isUserAdmin()){
+        		//es administrador
+        	req.getSession().setAttribute("admin", true);
+        }
 		
 		ReporteDAO reporteDao = ReporteDAOImpl.getInstance();
 		

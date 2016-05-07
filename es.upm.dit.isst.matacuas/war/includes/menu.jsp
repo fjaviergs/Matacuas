@@ -27,6 +27,16 @@
     		<li><a href="premiar.jsp">Premiar conductor</a></li>
   		</ul>
         </li>
+        <c:if test="${admin != null }">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu Administrador<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+    		<li><a href="/adminusers">Admin Usuarios</a></li>
+    		     		<li role="separator" class="divider"></li>
+    		<li><a href="/adminreportes">Admin Reportes</a></li>
+  		</ul>
+        </li>
+        </c:if>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
