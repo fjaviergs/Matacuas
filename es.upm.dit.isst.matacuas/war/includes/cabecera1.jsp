@@ -11,4 +11,5 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
 		<script src="js/bootstrap.min.js"></script>
