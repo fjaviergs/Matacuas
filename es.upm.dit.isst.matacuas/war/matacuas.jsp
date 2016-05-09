@@ -3,6 +3,7 @@
 <!-- css y scripts especiales para la pagina -->
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>	
 		<script src="js/mapa.js"></script>
+		<script src="js/subirImagen.js"></script>
 		
 <%@include file="includes/cabecera2.jsp" %>	
 
@@ -12,6 +13,7 @@
 				
 		<div class="container row col-md-6 col-md-offset-3">
 		<h3>Reportar Matacuás</h3>
+		<!-- en el form necesito  -->
 					<form action="/reporte" method="post" accept-charset="utf-8">
 						<div class="form-group">
 								<input type="hidden" name="positivo" id="positivo" value="false">
@@ -26,13 +28,17 @@
 							
 								<label for="lugar">Lugar del incidente</label>
 								<div id="mapa"></div>
-								<textarea readonly rows="1" class="form-control" name="lugar"
-										id="lugar"></textarea>
+								<textarea readonly rows="1" class="form-control" name="lugar" id="lugar"></textarea>
 								<label for="foto">Fotografía</label>
-								<input type="file" name="pic" id="pic" accept="image/*" class="btn btn-success"; capture="camera">
+																
+								<!-- NUEVO PARA SUBIR IMAGEN -->
+								<input type="hidden" name="pic" id="pic" value="">
+								<img src="" alt="ImagenSubida" height="70" style="display: none;" id="miniature"/>
+								<input type="file" onchange="subirImagen(this)" name="upload" id="upload" accept="image/*" class="btn btn-success"; capture="camera">							
+								<!-- FIN -->
+								
 								<br>
-								<input type="submit"
-								 value="Reportar" class="btn btn-info"/>
+								<input type="submit" value="Reportar" class="btn btn-info"/>
 							
 						</div>
 					</form>

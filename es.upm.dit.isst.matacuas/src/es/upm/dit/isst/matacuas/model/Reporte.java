@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.google.appengine.api.datastore.Text;
+
 @Entity
 public class Reporte implements Serializable {
 
@@ -19,18 +21,18 @@ public class Reporte implements Serializable {
 	private String matricula;
 	private String descripcion; 
 	private String lugar;
-	private byte[] imagen;
+	private Text imagenB64;
 	private boolean esPositivo;
 	
 	
 	public Reporte(String googleID, String matricula, String descripcion,
-			String lugar, byte[] imagen, boolean esPositivo) {
+			String lugar, Text imagenB64, boolean esPositivo) {
 		super();
 		this.googleID = googleID;
 		this.matricula = matricula;
 		this.descripcion = descripcion;
 		this.lugar = lugar;
-		this.imagen = imagen;
+		this.imagenB64 = imagenB64;
 		this.esPositivo = esPositivo;
 	}
 
@@ -78,12 +80,12 @@ public class Reporte implements Serializable {
 		return serialVersionUID;
 	}
 
-	public byte[] getImagen() {
-		return imagen;
+	public Text getImagen() {
+		return imagenB64;
 	}
 
-	public void setImagen(byte[] imagen) {
-		this.imagen = imagen;
+	public void setImagen(Text imagenB64) {
+		this.imagenB64 = imagenB64;
 	}
 
 	public String getGoogleID() {

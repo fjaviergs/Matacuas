@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.datanucleus.util.Base64;
+
+import com.google.appengine.api.datastore.Text;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
@@ -56,17 +59,17 @@ public class ReporteServlet extends HttpServlet {
 		String matricula = quitaNulos(req.getParameter("matricula"));
 		String descripcion = quitaNulos(req.getParameter("descripcion"));
 		String lugar = quitaNulos(req.getParameter("lugar"));
-		String imagenString = quitaNulos(req.getParameter("pic"));
-		
+		String imagen = quitaNulos(req.getParameter("pic"));
+		System.out.println(req.getParameter("pic"));
 		/*
 		 * Recupero la imagen y la almaceno como byte[]
 		 * falta testear
 		 */
-		byte[] imagen;
-		if (imagenString == null || imagenString.equals("")){
-		imagen=null;	
-		}else{
-		imagen = imagenString.getBytes();
+		Text imagenB64;
+		if (imagen == null || imagen.equals("")){
+			imagenB64 = null;	
+		} else {
+			imagenB64 = new Text(imagen);
 		}
 		
 		Boolean esPositivo;
@@ -122,7 +125,7 @@ String googleID = userService.getCurrentUser().getUserId();
 		
 		ReporteDAO reporteDAO = ReporteDAOImpl.getInstance();
 			System.out.println("con foto");
-		reporteDAO.add(googleID, matricula, descripcion, lugar, imagen, esPositivo);
+		reporteDAO.add(googleID, matricula, descripcion, lugar, imagenB64, esPositivo);
 		
 		/*
 		 * envio un aviso por email

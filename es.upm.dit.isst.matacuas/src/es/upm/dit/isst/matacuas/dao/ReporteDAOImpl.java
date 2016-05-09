@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import com.google.appengine.api.datastore.Text;
+
 import es.upm.dit.isst.matacuas.model.Reporte;
 
 public class ReporteDAOImpl implements ReporteDAO {
@@ -29,17 +31,17 @@ public class ReporteDAOImpl implements ReporteDAO {
 	}
 
 	@Override
-	public void add(String googleID, String matricula, String descripcion, String lugar, byte[] imagen, Boolean esPositivo) {
+	public void add(String googleID, String matricula, String descripcion, String lugar, Text imagenB64, Boolean esPositivo) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Reporte reporte = new Reporte(googleID, matricula, descripcion, lugar, imagen, esPositivo);
+			Reporte reporte = new Reporte(googleID, matricula, descripcion, lugar, imagenB64, esPositivo);
 			em.persist(reporte);
 			em.close();
 		}
 	}
 	
 	@Override
-	public void update(Long id, String googleID, String matricula, String descripcion, String lugar, byte[] imagen, Boolean esPositivo) {
+	public void update(Long id, String googleID, String matricula, String descripcion, String lugar, Text imagen, Boolean esPositivo) {
 		EntityManager em = EMFService.get().createEntityManager();
 		Reporte reporte = em.find(Reporte.class, id);
 		reporte.setGoogleID(googleID);

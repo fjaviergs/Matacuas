@@ -29,7 +29,15 @@
 								<textarea readonly rows="1" class="form-control" name="lugar"
 										id="lugar"></textarea>
 								<label for="foto">Fotografía</label>
-								<input type="file" name="pic" id="pic" accept="image/*" class="btn btn-success"; capture="camera">
+								
+								
+								<!-- NUEVO PARA SUBIR IMAGEN -->
+								<input type="hidden" name="pic" id="pic" value="">
+								<img src="" alt="ImagenSubida" height="70" style="display: none;" id="miniature"/>
+								<input type="file" onchange="subirImagen(this)" name="upload" id="upload" accept="image/*" class="btn btn-success"; capture="camera">							
+								<!-- FIN -->
+								
+								
 								<br>
 								<input type="submit"
 								 value="Reportar" class="btn btn-info"/>
