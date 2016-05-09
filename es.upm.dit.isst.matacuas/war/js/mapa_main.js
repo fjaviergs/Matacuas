@@ -3,6 +3,7 @@ var info_div;
 var map;
 var geocoder;
 var reportes;
+var activeInfoWindow;
 
 $(document).ready(function() {
 	reportes = [];
@@ -46,11 +47,22 @@ function crearMapa(lat, lon) {
 		icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
 	});
 	
+	var infowindow = new google.maps.InfoWindow({
+			content: "Tu estás aquí."
+	});
+	
 	marker.addListener('click', function() {
-		info_div.innerHTML ='<p>Tu estas ahi</p>';
+		infowindow.open(map, marker);
+		activeInfoWindow = infowindow;
 	});
 	
 	addAllMarkers();
+	
+	google.maps.event.addListener(map, "click", function(event) {
+		if(activeInfoWindow != null){	
+			activeInfoWindow.close();
+		}
+	});
 }
 /*
  * 	Genera un marcador en el mapa segun los parametros indicados:
@@ -61,12 +73,15 @@ function crearMapa(lat, lon) {
 function addMarker(lugar, esPositivo, reporteID) {
 	var icono_url;
 	var tipo;
+	var stringTipo;
 	if (esPositivo == "true") {
 		icono_url = 'https://maps.google.com/mapfiles/ms/icons/green-dot.png';
 		tipo = "positivo";
+		stringTipo = "Buen conductor ";
 	} else if (esPositivo == "false"){
 		icono_url = 'https://maps.google.com/mapfiles/ms/icons/red-dot.png';
 		tipo = "negativo";
+		stringTipo = "Matacuas ";
 	}
 	
 	geocoder.geocode({
@@ -80,10 +95,24 @@ function addMarker(lugar, esPositivo, reporteID) {
 			map: map,
 			icon: icono_url
 		});	
+		var contentString = '<div id="content">'+
+							'<p>'+stringTipo+'en '+lugar+'.</p>'+
+							'<form action="/detalle" method="post">'+
+								'<input type="hidden" name="id" id="id" value="'+Number(reporteID)+'" />'+
+								'<input type="submit" value="Ver detalles" class="btn btn-primary"/>'+
+							'</form>'+
+							'</div>';
+		var infowindow = new google.maps.InfoWindow({
+			content: contentString
+		});
+		
+		
 		marker.addListener('click', function() {
-			// boton para entrar al detalle
-			var form ='<form action="/detalle" method="post"><input type="hidden" name="id" id="id" value="'+Number(reporteID)+'"><input type="submit" value="Ampliar" class="btn btn-primary"/></form>';
-			info_div.innerHTML ='<p>Reporte '+tipo+'</p>'+form;
+			if(activeInfoWindow != null){	
+				activeInfoWindow.close();
+			}
+			infowindow.open(map, marker);
+			activeInfoWindow = infowindow;
 		});
 	});	
 }
