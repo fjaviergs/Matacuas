@@ -52,6 +52,9 @@ function crearMapa(lat, lon) {
 	});
 	
 	marker.addListener('click', function() {
+		if(activeInfoWindow != null){	
+			activeInfoWindow.close();
+		}
 		infowindow.open(map, marker);
 		activeInfoWindow = infowindow;
 	});
