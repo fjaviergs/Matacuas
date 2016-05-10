@@ -27,7 +27,7 @@ function showPosition(position){
 
 function crearMapa(lat, lon) {
 	main_div.style.width = "100%";
-	main_div.style.height = "500px";
+	main_div.style.height = "85vh";
 	
 	var coords = new google.maps.LatLng(lat, lon);
 	var options = {
