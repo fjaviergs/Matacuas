@@ -4,6 +4,8 @@ var map;
 var geocoder;
 var reportes;
 var activeInfoWindow;
+var reportesBuscados;
+var markers = [];
 
 $(document).ready(function() {
 	reportes = [];
@@ -27,7 +29,7 @@ function showPosition(position){
 
 function crearMapa(lat, lon) {
 	main_div.style.width = "100%";
-	main_div.style.height = "85vh";
+	main_div.style.height = "75vh";
 	
 	var coords = new google.maps.LatLng(lat, lon);
 	var options = {
@@ -117,6 +119,7 @@ function addMarker(lugar, esPositivo, reporteID) {
 			infowindow.open(map, marker);
 			activeInfoWindow = infowindow;
 		});
+		markers.push(marker);
 	});	
 }
 
@@ -136,4 +139,40 @@ function addAllMarkers() {
 		var reporte = reportes[n].split(":");
 		addMarker(reporte[0], reporte[1], reporte[2]);
 	}
+}
+
+function filtrarResultados(filtro) {
+	// Se cojen solo los marcadores buscados por matrícula
+	var matricula = filtro.value;
+	reportesBuscados = [];
+	for(var r in reportes) {
+		mat = reportes[r].split(":")[3];
+		console.log(matricula);
+		console.log(mat);
+		if (mat == matricula) {
+			console.log("coinciden!");
+			reportesBuscados.push(reportes[r]);
+		}
+	}
+	// Limpiar aqui todos los marker
+	deleteAllMarkers();
+	// Poner toodos los marker con la busqueda
+	for(var n in reportesBuscados) {
+		var reporte = reportes[n].split(":");
+		addMarker(reporte[0], reporte[1], reporte[2]);
+	}
+}
+
+function limpiarFiltro() {
+	// Se vuelven a pintar todos los marcadores en el mapa
+	deleteAllMarkers();
+	addAllMarkers();
+	document.getElementById("filtroBusqueda").value = Matricula + Enter;
+}
+
+function deleteAllMarkers() {
+	for (var m in markers) {
+		markers[m].setMap(null);
+	}
+	markers = [];
 }

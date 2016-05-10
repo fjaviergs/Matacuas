@@ -70,3 +70,10 @@
 	width: 33%;
 	padding: 5px;
 }
+
+.busqueda {
+	display: inline;
+	padding-top: 15px;
+}
+.filtroBusqueda {}
+.btnLimpiarFiltro {}

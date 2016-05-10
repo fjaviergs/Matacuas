@@ -9,16 +9,20 @@
 			
 			<%@include file="includes/avisoinfo.jsp" %>	
 			
-		<div class="container row col-md-6 col-md-offset-3" id="main_div">
+		<div id="main_div">
 			
 			<div class="reporte" id="mapa_main"></div>
-			<div id ="info"></div>
 
 			<c:set var="count" value="0" />
 			<c:forEach items="${reportes}" var="reporte">
-				<input id="reporte${count}" type="hidden" value="${reporte.lugar}:${reporte.esPositivo}:${reporte.id}" />
+				<input id="reporte${count}" type="hidden" value="${reporte.lugar}:${reporte.esPositivo}:${reporte.id}:${reporte.matricula}" />
 				<c:set var="count" value="${count + 1}" />
 			</c:forEach>
+			
+			<div class="container row col-md-4 col-md-offset-4" id="busqueda">
+				<input type="text" cols="7" class="form-control" id="filtroBusqueda" onchange="filtrarResultados(this)" value="Matricula + Enter"/>
+				<input type="button" class="btn btn-info" id="btnLimpiarFiltro" onclick="limpiarFiltro()" value="Limpiar Filtro"/>
+			</div>
 
 		
 			
