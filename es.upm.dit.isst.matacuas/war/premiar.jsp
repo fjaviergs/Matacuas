@@ -3,6 +3,7 @@
 <!-- css y scripts especiales para la pagina -->
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>	
 		<script src="js/mapa.js"></script>
+		<script src="js/subirImagen.js"></script>
 		
 <%@include file="includes/cabecera2.jsp" %>	
 

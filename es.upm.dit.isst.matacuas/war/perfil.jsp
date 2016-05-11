@@ -21,7 +21,7 @@
 								<br>
 								<input type="submit"
 								 value="Actualizar" class="btn btn-info"/>
-								 <a href="main.jsp" class="btn btn-info" role="button">Volver</a>
+								 <a href="/main" class="btn btn-info" role="button">Volver</a>
 							
 						</div>
 					</form>

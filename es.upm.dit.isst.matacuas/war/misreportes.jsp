@@ -1,5 +1,6 @@
 <%@include file="includes/cabecera1.jsp" %>
-<%@include file="includes/cabecera2.jsp" %>	
+<%@include file="includes/cabecera2.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 			
 			<%@include file="includes/menu.jsp" %>
 			
@@ -16,6 +17,7 @@
       	<th>Matrícula</th>
         <th>Lugar</th>
         <th>Descripción</th>
+        <th>Fecha/Hora</th>
         <th></th>
       </tr>
     </thead>
@@ -25,6 +27,7 @@
       <td><c:out value="${reporte.matricula}"/></td>
         <td><c:out value="${reporte.lugar}"/></td>
         <td><c:out value="${reporte.descripcion}" /></td>
+        <td><fmt:formatDate value="${reporte.fecha}" pattern="dd-MMM-yyyy | HH:mm"/></td>
         <td><form action="/detalle" method="post">
 								<input type="hidden" name="id" id="id" value="${reporte.id}">								
 								<input type="submit" value="Ampliar" class="btn btn-primary"/>							
@@ -49,6 +52,7 @@
       	<th>Matrícula</th>
         <th>Lugar</th>
         <th>Descripción</th>
+        <th>Fecha/Hora</th>
         <th></th>
       </tr>
     </thead>
@@ -58,6 +62,7 @@
       <td><c:out value="${reporte.matricula}"/></td>
         <td><c:out value="${reporte.lugar}"/></td>
         <td><c:out value="${reporte.descripcion}" /></td>
+        <td><fmt:formatDate value="${reporte.fecha}" pattern="dd-MMM-yyyy | HH:mm"/></td>
         <td><form action="/detalle" method="post">
 								<input type="hidden" name="id" id="id" value="${reporte.id}">
 								<input type="hidden" name="mio" id="mio" value="true">								

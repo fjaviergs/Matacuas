@@ -1,6 +1,8 @@
 package es.upm.dit.isst.matacuas;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +21,7 @@ import es.upm.dit.isst.matacuas.dao.ReporteDAOImpl;
 import es.upm.dit.isst.matacuas.dao.UsuarioDAO;
 import es.upm.dit.isst.matacuas.dao.UsuarioDAOImpl;
 
+import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -121,11 +124,14 @@ public class ReporteServlet extends HttpServlet {
 	        return;
 		}
 		
-String googleID = userService.getCurrentUser().getUserId();
+		String googleID = userService.getCurrentUser().getUserId();
+		Date fecha = new Date();
+		//DateFormat df = new SimpleDateFormat("ss/MM/yyyy HH:mm:ss");
+		//String fecha = df.format(date);
 		
 		ReporteDAO reporteDAO = ReporteDAOImpl.getInstance();
-			System.out.println("con foto");
-		reporteDAO.add(googleID, matricula, descripcion, lugar, imagenB64, esPositivo);
+			//System.out.println("con foto");
+		reporteDAO.add(googleID, matricula, descripcion, lugar, imagenB64, esPositivo, fecha);
 		
 		/*
 		 * envio un aviso por email

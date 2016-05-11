@@ -1,5 +1,6 @@
 package es.upm.dit.isst.matacuas.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -31,17 +32,17 @@ public class ReporteDAOImpl implements ReporteDAO {
 	}
 
 	@Override
-	public void add(String googleID, String matricula, String descripcion, String lugar, Text imagenB64, Boolean esPositivo) {
+	public void add(String googleID, String matricula, String descripcion, String lugar, Text imagenB64, Boolean esPositivo, Date fecha) {
 		synchronized (this) {
 			EntityManager em = EMFService.get().createEntityManager();
-			Reporte reporte = new Reporte(googleID, matricula, descripcion, lugar, imagenB64, esPositivo);
+			Reporte reporte = new Reporte(googleID, matricula, descripcion, lugar, imagenB64, esPositivo, fecha);
 			em.persist(reporte);
 			em.close();
 		}
 	}
 	
 	@Override
-	public void update(Long id, String googleID, String matricula, String descripcion, String lugar, Text imagen, Boolean esPositivo) {
+	public void update(Long id, String googleID, String matricula, String descripcion, String lugar, Text imagen, Boolean esPositivo, Date fecha) {
 		EntityManager em = EMFService.get().createEntityManager();
 		Reporte reporte = em.find(Reporte.class, id);
 		reporte.setGoogleID(googleID);
@@ -50,6 +51,7 @@ public class ReporteDAOImpl implements ReporteDAO {
 		reporte.setLugar(lugar);
 		reporte.setImagen(imagen);
 		reporte.setEsPositivo(esPositivo);
+		reporte.setFecha(fecha);
 		em.merge(reporte);
 		em.close();
 	}
@@ -91,6 +93,9 @@ public class ReporteDAOImpl implements ReporteDAO {
 		return reportes;
 	}
 
-	
+	public List<Reporte> ordenarPorFecha(List<Reporte> reportes) {
+		List<Reporte> listaOrdenada = reportes;
+		return listaOrdenada;
+	}
 }
 

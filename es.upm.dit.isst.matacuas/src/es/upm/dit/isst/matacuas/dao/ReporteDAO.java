@@ -1,5 +1,6 @@
 package es.upm.dit.isst.matacuas.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.appengine.api.datastore.Text;
@@ -10,9 +11,9 @@ public interface ReporteDAO {
 
 	public List<Reporte> listReportes();
 	
-	public void add (String googleID, String matricula, String descripcion, String lugar, Text imagenB64, Boolean esPositivo);
+	public void add (String googleID, String matricula, String descripcion, String lugar, Text imagenB64, Boolean esPositivo, Date fecha);
 	
-	public void update (Long id, String googleID, String matricula, String descripcion, String lugar, Text imagenB64, Boolean esPositivo);
+	public void update (Long id, String googleID, String matricula, String descripcion, String lugar, Text imagenB64, Boolean esPositivo, Date fecha);
 	
 	public Reporte getReporte(Long reporteId);
 	

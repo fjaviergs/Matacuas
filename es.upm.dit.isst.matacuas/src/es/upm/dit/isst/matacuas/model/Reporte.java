@@ -1,6 +1,7 @@
 package es.upm.dit.isst.matacuas.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,10 +24,11 @@ public class Reporte implements Serializable {
 	private String lugar;
 	private Text imagenB64;
 	private boolean esPositivo;
+	public Date fecha;
 	
-	
+
 	public Reporte(String googleID, String matricula, String descripcion,
-			String lugar, Text imagenB64, boolean esPositivo) {
+			String lugar, Text imagenB64, boolean esPositivo, Date fecha) {
 		super();
 		this.googleID = googleID;
 		this.matricula = matricula;
@@ -34,6 +36,7 @@ public class Reporte implements Serializable {
 		this.lugar = lugar;
 		this.imagenB64 = imagenB64;
 		this.esPositivo = esPositivo;
+		this.fecha = fecha;
 	}
 
 	public Long getId() {
@@ -96,6 +99,16 @@ public class Reporte implements Serializable {
 		this.googleID = googleID;
 	}
 	
-	
+	public Date getFecha() {
+		return fecha;
+	}
 
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	/*@Override
+	public int compareTo(Reporte r) {
+		if()
+	}*/
 }
