@@ -108,17 +108,22 @@ public class Reporte implements Serializable, Comparable<Reporte>{
 	}
 
 	// Los reportes se comparan solamente por su fecha para ordenarlos.
+	@Override
 	public int compareTo(Reporte r) {
-		int n = fecha.compareTo(r.getFecha());
-		if (n == 0) {
-			return 0;
-		} else if (n > 0) {
-			return -1;
-		} else if (n < 0) {
-			return 1;
-		} else {
-			System.out.println("Error al comparar");
-			return 0;
+		try {
+			int n = fecha.compareTo(r.getFecha());
+			if (n == 0) {
+				return 0;
+			} else if (n > 0) {
+				return -1;
+			} else if (n < 0) {
+				return 1;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		System.out.println("Error al comparar.");
+		return 0;
 	}
 }
