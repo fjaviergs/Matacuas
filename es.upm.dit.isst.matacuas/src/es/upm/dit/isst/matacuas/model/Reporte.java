@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import com.google.appengine.api.datastore.Text;
 
 @Entity
-public class Reporte implements Serializable {
+public class Reporte implements Serializable, Comparable<Reporte>{
 
 
 	private static final Long serialVersionUID = 1L;
@@ -107,8 +107,18 @@ public class Reporte implements Serializable {
 		this.fecha = fecha;
 	}
 
-	/*@Override
+	// Los reportes se comparan solamente por su fecha para ordenarlos.
 	public int compareTo(Reporte r) {
-		if()
-	}*/
+		int n = fecha.compareTo(r.getFecha());
+		if (n == 0) {
+			return 0;
+		} else if (n > 0) {
+			return -1;
+		} else if (n < 0) {
+			return 1;
+		} else {
+			System.out.println("Error al comparar");
+			return 0;
+		}
+	}
 }

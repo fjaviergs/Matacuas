@@ -1,5 +1,6 @@
 package es.upm.dit.isst.matacuas.dao;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ReporteDAOImpl implements ReporteDAO {
 		EntityManager em = EMFService.get().createEntityManager();
 		Query q = em.createQuery("select m from Reporte m");
 		List<Reporte> reportes = q.getResultList();
-		return reportes;
+		return ordenarPorFecha(reportes);
 	}
 
 	@Override
@@ -81,7 +82,7 @@ public class ReporteDAOImpl implements ReporteDAO {
 		Query q = em.createQuery("select m from Reporte m where m.matricula = :matricula");
 		q.setParameter("matricula", matricula);
 		List<Reporte> reportes = q.getResultList();
-		return reportes;
+		return ordenarPorFecha(reportes);
 	}
 
 	@Override
@@ -90,11 +91,12 @@ public class ReporteDAOImpl implements ReporteDAO {
 		Query q = em.createQuery("select m from Reporte m where m.googleID = :googleID");
 		q.setParameter("googleID", googleID);
 		List<Reporte> reportes = q.getResultList();
-		return reportes;
+		return ordenarPorFecha(reportes);
 	}
 
 	public List<Reporte> ordenarPorFecha(List<Reporte> reportes) {
 		List<Reporte> listaOrdenada = reportes;
+		Collections.sort(listaOrdenada);
 		return listaOrdenada;
 	}
 }
