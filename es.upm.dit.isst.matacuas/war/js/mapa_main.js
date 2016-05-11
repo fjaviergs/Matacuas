@@ -147,18 +147,17 @@ function filtrarResultados(filtro) {
 	reportesBuscados = [];
 	for(var r in reportes) {
 		mat = reportes[r].split(":")[3];
-		console.log(matricula);
-		console.log(mat);
 		if (mat == matricula) {
 			console.log("coinciden!");
 			reportesBuscados.push(reportes[r]);
 		}
 	}
+
 	// Limpiar aqui todos los marker
 	deleteAllMarkers();
 	// Poner toodos los marker con la busqueda
 	for(var n in reportesBuscados) {
-		var reporte = reportes[n].split(":");
+		var reporte = reportesBuscados[n].split(":");
 		addMarker(reporte[0], reporte[1], reporte[2]);
 	}
 }
