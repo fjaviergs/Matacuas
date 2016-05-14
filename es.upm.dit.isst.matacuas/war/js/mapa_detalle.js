@@ -51,8 +51,8 @@ $(document).ready(function() {
 
 function generarMapa(coords) {
 	var mapa = document.getElementById("mapa");
-	mapa.style.width = document.getElementById("descripcion").width;
-	mapa.style.height = "250px";
+	mapa.style.width = "100%";
+	mapa.style.height = "40vh";
 	var options = {
 		zoom: 16,
 		center: coords,
