@@ -7,7 +7,15 @@ var activeInfoWindow;
 var reportesBuscados;
 var markers = [];
 
+
 $(document).ready(function() {
+	scrollUp();
+	window.addEventListener("scroll", function(evt) {
+		document.getElementById("btnGoTop").style.display = "block";
+		if (evt.pageY == 0) {
+			document.getElementById("btnGoTop").style.display = "none";
+		}
+	});
 	reportes = [];
 	getReportes();
 	geocoder = new google.maps.Geocoder;
@@ -29,7 +37,7 @@ function showPosition(position){
 
 function crearMapa(lat, lon) {
 	main_div.style.width = "100%";
-	main_div.style.height = "75vh";
+	main_div.style.height = "85vh";
 	
 	var coords = new google.maps.LatLng(lat, lon);
 	var options = {
@@ -166,7 +174,7 @@ function limpiarFiltro() {
 	// Se vuelven a pintar todos los marcadores en el mapa
 	deleteAllMarkers();
 	addAllMarkers();
-	document.getElementById("filtroBusqueda").value = Matricula + Enter;
+	document.getElementById("filtroBusqueda").value = "Buscar matricula.";
 }
 
 function deleteAllMarkers() {
@@ -174,4 +182,21 @@ function deleteAllMarkers() {
 		markers[m].setMap(null);
 	}
 	markers = [];
+}
+
+function borrarValor(e) {
+	e.value = "";
+}
+
+function scrollDown() {
+	document.getElementById("btnGoTop").style.display = "block";
+	var $target = $('html,body'); 
+	$target.animate({scrollTop: $target.height()}, "slow");
+	return false;
+}
+
+function scrollUp() {
+	$("html, body").animate({ scrollTop: 0 }, "slow");
+	document.getElementById("btnGoTop").style.display = "none";
+	return false;
 }

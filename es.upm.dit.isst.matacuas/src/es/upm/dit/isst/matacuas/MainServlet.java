@@ -15,8 +15,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import es.upm.dit.isst.matacuas.model.Reporte;
+import es.upm.dit.isst.matacuas.model.Usuario;
 import es.upm.dit.isst.matacuas.dao.ReporteDAO;
 import es.upm.dit.isst.matacuas.dao.ReporteDAOImpl;
+import es.upm.dit.isst.matacuas.dao.UsuarioDAO;
+import es.upm.dit.isst.matacuas.dao.UsuarioDAOImpl;
 
 public class MainServlet extends HttpServlet {
 
@@ -56,7 +59,37 @@ UserService userService = UserServiceFactory.getUserService();
 		List<Reporte> reportes = reporteDao.listReportes();
 		req.getSession().setAttribute("reportes", new ArrayList<Reporte>(reportes));
 		
+        // COJO LOS 10 PRIMEROS REALIZADOS Y 10 RECIBIDOS PARA LA TABLA EN MAIN
+		// MISMO CODIGO QUE EN MISREPORTESSERVLET
+		String googleID = userService.getCurrentUser().getUserId();
+		UsuarioDAO usuarioDao = UsuarioDAOImpl.getInstance();
+		Usuario usuario = usuarioDao.getUsuario(googleID);
+		String matricula = null;
+		
+		if (usuario != null){
+			matricula = usuario.getMatricula();
+		}
+		if(matricula == null || matricula.equals("")){
+			req.getSession().setAttribute("mensajeInfo", "No has introducido una matricula en tu cuenta");			
+		}else{
+			List<Reporte> recibidos = reporteDao.getReportesConMatricula(matricula);
+			List<Reporte> realizados = reporteDao.getReportesConGoogleID(googleID);
+			recibidos = reducirLista(recibidos);
+			realizados = reducirLista(realizados);
+			req.getSession().setAttribute("recibidos", new ArrayList<Reporte>(recibidos));
+			req.getSession().setAttribute("realizados", new ArrayList<Reporte>(realizados));
+		}
+		// FIN COPIA
+		
 		RequestDispatcher view = req.getRequestDispatcher("main.jsp");
         view.forward(req, resp);
+	}
+	
+	public List<Reporte> reducirLista(List<Reporte> l) {
+		if (l.size()>6) {
+			return l.subList(0, 7);
+		} else {
+			return l;
+		}
 	}
 }

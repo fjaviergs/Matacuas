@@ -33,8 +33,8 @@ function showPosition(position) {
 }
 
 function crearMapa(lat, lon) {
-	mapa.style.height = "400px";
-	mapa.style.width = document.getElementById("lugar").width;
+	mapa.style.height = "40vh";
+	mapa.style.width = "100%";
 	
 	var coords = new google.maps.LatLng(lat, lon);
 	var options = {
@@ -71,4 +71,8 @@ function crearMapa(lat, lon) {
 	  });
 		
 	});
+}
+
+function ponerBlanco(e) {
+	e.value="";
 }
