@@ -11,16 +11,16 @@
 			<%@include file="includes/avisoinfo.jsp" %>	
 			
 		<div class="container" id="main_1">
-			<div class="jumbotron">
+			<div class="jumbotron" id="jumbotron">
 			<div id="busqueda" class="input-group">
-				<input type="text" size="7" class="form-control" id="filtroBusqueda" onclick="borrarValor(this)" onchange="filtrarResultados(this)" value="Buscar matricula."/>
+				<input type="text" size="7" class="form-control" id="filtroBusqueda" onclick="borrarValor(this)" onchange="filtrarResultados(this)" value="Buscar matricula"/>
 				<span class="input-group-btn">
-					<input type="button" class="btn btn-info" id="btnLimpiarFiltro" onclick="limpiarFiltro()" value="Limpiar Filtro"/>
+					<input type="button" class="btn btn-info" id="btnLimpiarFiltro" onclick="limpiarFiltro()" value="Reiniciar busqueda"/>
 					<input type="button" class="btn btn-success" id="btnVerTabla" onclick="scrollDown()" value="Ver ultimos eventos"/>
 				</span>
 			</div>
 			
-			<div class="reporte" id="mapa_main"></div>
+			<div id="mapa_main"></div>
 			</div>
 		</div>
 			<c:set var="count" value="0" />
