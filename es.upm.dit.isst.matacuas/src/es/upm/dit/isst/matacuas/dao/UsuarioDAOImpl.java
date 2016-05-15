@@ -42,7 +42,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public void update(String googleID, String email, String matricula) {
 		EntityManager em = EMFService.get().createEntityManager();
-		Usuario usuario = em.find(Usuario.class, googleID);
+		Usuario usuario = em.find(Usuario.class, getID(googleID));
 		usuario.setEmail(email);
 		usuario.setMatricula(matricula);
 		em.merge(usuario);
@@ -52,8 +52,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario getUsuario(String googleID) {
 		EntityManager em = EMFService.get().createEntityManager();
-		Usuario usuario = em.find(Usuario.class, googleID);
-		return usuario;
+		Query q = em.createQuery("select m from Usuario m where m.googleID = :googleID");
+		q.setParameter("googleID", googleID);
+		List<Usuario> resultado = q.getResultList();
+		if(resultado.isEmpty()){return null;}else{return resultado.get(0);}
 	}
 	
 
@@ -61,7 +63,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	public void remove(String googleID) {
 		EntityManager em = EMFService.get().createEntityManager();
 		try {
-			Usuario usuario = em.find(Usuario.class, googleID);
+			Usuario usuario = em.find(Usuario.class, getID(googleID));
 			em.remove(usuario);
 		} finally {
 			em.close();
@@ -75,6 +77,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		q.setParameter("matricula", matricula);
 		List<String> resultado = q.getResultList();
 		if(resultado.isEmpty()){return null;}else{return resultado.get(0);}
+	}
+	private long getID(String googleID){
+		EntityManager em = EMFService.get().createEntityManager();
+		Query q = em.createQuery("select m from Usuario m where m.googleID = :googleID");
+		q.setParameter("googleID", googleID);
+		List<Usuario> resultado = q.getResultList();
+		if(resultado.isEmpty()){return (Long) null;}else{return resultado.get(0).getId();}
 	}
 
 }

@@ -12,14 +12,21 @@ public class Usuario implements Serializable {
 
 	private static final Long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String googleID;
 	private String email;
 	private String matricula;
 	
 	public Usuario(String googleID, String email, String matricula) {
+		super();
 		this.googleID = googleID;
 		this.email = email;
 		this.matricula = matricula;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
 	public String getGoogleID() {
