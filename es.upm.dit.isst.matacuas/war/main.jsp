@@ -1,7 +1,7 @@
 <%@include file="includes/cabecera1.jsp" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
 		<script src="js/mapa_main.js"></script>
 
 <%@include file="includes/cabecera2.jsp" %>	

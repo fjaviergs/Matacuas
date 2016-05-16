@@ -1,7 +1,7 @@
 <%@include file="includes/cabecera1.jsp" %>
 
 <!-- css y scripts especiales para la pagina -->
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>	
+		<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>	
 		<script src="js/mapa.js"></script>
 		<script src="js/subirImagen.js"></script>
 		<script src="js/reiniciarValores.js"></script>
